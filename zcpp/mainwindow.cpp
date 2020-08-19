@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mouse.h"
+
 #include <QDebug>
-#include <QElapsedTimer>
 
 
-QElapsedTimer maze_timer;
+
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -16,13 +18,29 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer, SIGNAL(timeout()), this, SLOT(timer_func()));
 
     scene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(scene);
+    ui->main_board->setScene(scene);
+    ui->main_board->setRenderHint(QPainter::Antialiasing);
+    scene->setSceneRect(0,0,498,498);
 
-    QBrush redBrush(Qt::red);
+    QLineF TopLine(scene->sceneRect().topLeft(), scene->sceneRect().topRight());
+    QLineF BottomLine(scene->sceneRect().bottomLeft(), scene->sceneRect().bottomRight());
+    QLineF LeftLine(scene->sceneRect().topLeft(), scene->sceneRect().bottomLeft());
+    QLineF RightLine(scene->sceneRect().topRight(), scene->sceneRect().bottomRight());
+
     QPen blashpen(Qt::black);
-    blashpen.setWidth(6);
+    blashpen.setWidth(1);
 
-    mouse = scene->addRect(10,10,100,100,blashpen, redBrush);
+    scene->addLine(TopLine,blashpen);
+    scene->addLine(BottomLine,blashpen);
+    scene->addLine(LeftLine,blashpen);
+    scene->addLine(RightLine,blashpen);
+
+    Mouse *m = new Mouse();
+    scene->addItem(m);
+
+    t_move = new QTimer(this);
+    connect(t_move, SIGNAL(timeout()), scene, SLOT(advance()));
+
 
 }
 
@@ -30,6 +48,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
 
 void MainWindow::on_maze_choosing_activated(const QString &arg1)
 {
@@ -45,6 +65,8 @@ void MainWindow::on_start_pushButton_clicked()
 {
     maze_timer.start();
     timer->start(10);
+
+    t_move->start(100);
 }
 
 void MainWindow::timer_func()

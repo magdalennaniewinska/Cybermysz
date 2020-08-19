@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QElapsedTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,13 +23,6 @@ public slots:
     void timer_func();
 
 private slots:
-    void on_pushButton_clicked();
-
-    void on_label_linkActivated(const QString &link);
-
-    void on_comboBox_activated(const QString &arg1);
-
-    void on_comboBox_2_activated(const QString &arg1);
 
     void on_maze_choosing_activated(const QString &arg1);
 
@@ -39,7 +33,9 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
+    QTimer *t_move;
     QGraphicsScene *scene;
     QGraphicsRectItem *mouse;
+    QElapsedTimer maze_timer;
 };
 #endif // MAINWINDOW_H

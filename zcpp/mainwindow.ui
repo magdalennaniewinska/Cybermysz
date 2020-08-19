@@ -85,10 +85,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="start_pushButton">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>40</y>
-      <width>121</width>
-      <height>51</height>
+      <x>530</x>
+      <y>210</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -98,9 +98,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="stopwatch">
     <property name="geometry">
      <rect>
-      <x>540</x>
-      <y>220</y>
-      <width>201</width>
+      <x>690</x>
+      <y>210</y>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -108,13 +108,13 @@ p, li { white-space: pre-wrap; }
      <string>00:00:00</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="main_board">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>341</width>
-      <height>311</height>
+      <x>10</x>
+      <y>10</y>
+      <width>501</width>
+      <height>501</height>
      </rect>
     </property>
    </widget>
